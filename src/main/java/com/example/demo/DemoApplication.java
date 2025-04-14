@@ -12,6 +12,10 @@ public class DemoApplication {
     public static void main(String[] args) throws IOException {
         int port = 9191;
         HttpServer server = HttpServer.create(new InetSocketAddress("0.0.0.0", port), 0);
+        
+        // Add root context handling
+        server.createContext("/", new HelloHandler()); // Added this line for root context
+        
         server.createContext("/hello", new HelloHandler());
         server.setExecutor(null);
         System.out.println("Server started on port " + port);
